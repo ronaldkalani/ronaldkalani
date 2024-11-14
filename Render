@@ -1,0 +1,44 @@
+from flask import Flask, request, jsonify
+
+app = Flask(__name__)
+
+# Route for student number
+@app.route("/", methods=["GET"])
+def get_student_number():
+    return jsonify({"student_number": "200619730"})
+
+# Webhook route for Dialogflow fulfillment
+@app.route("/webhook", methods=["POST"])
+def webhook():
+    data = request.get_json()  # Get the JSON request from Dialogflow
+    intent_name = data.get("queryResult", {}).get("intent", {}).get("displayName", "")
+    
+    if intent_name == "ProvideCourseDetails2":
+        response = {
+            "fulfillmentText": """
+            In Semester 1, the courses include:
+            - Artificial Intelligence Algorithms and Mathematics
+            - Conversational Artificial Intelligence
+            - Machine Learning Programming
+            - Machine Learning Frameworks
+            - Issues and Challenges in Artificial Intelligence
+            - Artificial Intelligence for Business Decision Making
+            - Data Manipulation Techniques
+
+            In Semester 2, students take courses in:
+            - Artificial Intelligence Infrastructure and Architecture
+            - Vision Systems
+            - Reinforcement Learning Programming
+            - Neural Networks
+            - Emerging Artificial Intelligence Technologies
+            - Artificial Intelligence Project
+            - Artificial Intelligence Robotics and Automation
+            """
+        }
+    else:
+        response = {"fulfillmentText": "Intent not recognized."}
+    
+    return jsonify(response)
+
+if __name__ == "__main__":
+    app.run(debug=True)
