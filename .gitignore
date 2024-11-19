@@ -82,4 +82,8 @@ AppData/Roaming/
 AppData/Roaming/Mozilla/
 *.html
 *.tmp
+# Exclude AppData and other system paths
+AppData/
+AppData/Local/
+AppData/Roaming/
 
