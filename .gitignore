@@ -71,4 +71,15 @@ secure-connect-event-data.zip
 
 # Others
 __MACOSX/
+# Exclude AppData and system paths
+AppData/
+AppData/Local/
+AppData/Local/Application Data/
+AppData/Local/History/
+AppData/Local/Microsoft/Windows/INetCache/
+AppData/Local/Microsoft/Windows/Temporary Internet Files/
+AppData/Roaming/
+AppData/Roaming/Mozilla/
+*.html
+*.tmp
 
